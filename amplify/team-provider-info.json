@@ -1,0 +1,15 @@
+{
+    "photostore": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-s3-photostore-photostore-214248-authRole",
+            "UnauthRoleArn": "arn:aws:iam::425378036154:role/amplify-s3-photostore-photostore-214248-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::425378036154:role/amplify-s3-photostore-photostore-214248-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-s3-photostore-photostore-214248-deployment",
+            "UnauthRoleName": "amplify-s3-photostore-photostore-214248-unauthRole",
+            "StackName": "amplify-s3-photostore-photostore-214248",
+            "StackId": "arn:aws:cloudformation:us-east-2:425378036154:stack/amplify-s3-photostore-photostore-214248/98aca9e0-3e5b-11ea-8d77-02860fd3b864",
+            "AmplifyAppId": "dimuxkgh8vbk6"
+        }
+    }
+}
