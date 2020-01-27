@@ -20,7 +20,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-const upload = multer({
+const image_upload = multer({
   fileFilter,
   storage: multers3({
     acl: "public-read",
@@ -35,7 +35,31 @@ const upload = multer({
   })
 });
 
-module.exports = upload;
+const text_upload = (req, res, next) => {
+  console.log("beginning text upload");
+  const uploadPromise = s3
+    .putObject({
+      Bucket: bucketName,
+      Key: Date.now().toString(),
+      Body: req.body.text
+    })
+    .promise();
+
+  uploadPromise
+    .then(res => {
+      console.log("in the .then of text upload");
+      console.log("req.body", req.body);
+      req.uploadRes = res;
+      next();
+    })
+    .catch(err =>
+      res
+        .status(400)
+        .json({ error: "failed to upload text", detail: JSON.stringify(err) })
+    );
+};
+
+module.exports = { image_upload, text_upload };
 
 // const bucketPromise = new aws.S3()
 //   .createBucket({ Bucket: bucketName })

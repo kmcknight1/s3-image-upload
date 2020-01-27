@@ -1,9 +1,9 @@
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const upload = require("./image_upload");
+const { image_upload, text_upload } = require("./image_upload");
 
-const singleUpload = upload.single("image");
+const singleUpload = image_upload.single("image");
 
 const server = express();
 
@@ -16,10 +16,8 @@ server.get("/", (_, res) => {
 });
 
 server.post("/image-upload", (req, res) => {
-  console.log(`\n REQUEST BODY \n`, req.body);
-  console.log(`\n REQUEST \n`, req);
-
-  console.log("upload", upload.single("image"));
+  console.log("REQUEST", req);
+  console.log("image_upload", image_upload.single("image"));
 
   singleUpload(req, res, function(err) {
     if (err) {
@@ -31,6 +29,11 @@ server.post("/image-upload", (req, res) => {
       return res.send("SUCCESS");
     }
   });
+});
+
+server.post("/text-upload", text_upload, (req, res) => {
+  console.log("UPLOAD RESPONSE: ", req.uploadRes);
+  res.status(200).json({ message: "SUCCESS" });
 });
 
 server.listen(6666, () => console.log(`\n**** RUNNING ON PORT 6666 ****\n`));
