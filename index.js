@@ -16,9 +16,6 @@ server.get("/", (_, res) => {
 });
 
 server.post("/image-upload", (req, res) => {
-  console.log("REQUEST", req);
-  console.log("image_upload", image_upload.single("image"));
-
   singleUpload(req, res, function(err) {
     if (err) {
       console.log(err.message);
@@ -26,7 +23,8 @@ server.post("/image-upload", (req, res) => {
         errors: [{ title: "Image Upload Error", detail: err.message }]
       });
     } else {
-      return res.send("SUCCESS");
+      console.log("REQ.FILE>>>>>>>>>>>>>>", req.file);
+      return res.json({ message: "SUCCESS", url: req.file.location });
     }
   });
 });
