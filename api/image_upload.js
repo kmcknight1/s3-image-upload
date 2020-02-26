@@ -1,5 +1,4 @@
 const aws = require("aws-sdk");
-const uuid = require("uuid");
 const multer = require("multer");
 const multers3 = require("multer-s3");
 
