@@ -21,7 +21,7 @@ This app was made by [Katie Embrey-Farquhar]("https://github.com/kmcknight1") as
 
 #### URL: ???/api/auth/register
 
-**Payload:** _an object with the following credentials:_
+**Payload:** _an object with the following:_
 
 > **Required:** `username` & `password`
 
