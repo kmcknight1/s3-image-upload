@@ -6,4 +6,4 @@
 
 - follow `javascript` url prompt in your browser
 
-- docs, sign up for aws, use access key and secret to pull up account on your machine, name it
+- docs, sign up for aws, use access key and secret to pull up account on your machine, name it, follow prompts, etc.
