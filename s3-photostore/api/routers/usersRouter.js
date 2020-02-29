@@ -2,6 +2,19 @@ const router = require("express").Router();
 
 const Users = require("../helpers/users-helper");
 
+router.get("/", (req, res) => {
+  Users.find()
+    .then(users => {
+      users.forEach(user => {
+        delete user.password;
+      });
+      res.status(200).json(users);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Internal server error" });
+    });
+});
+
 router.put("/:id", validateById, (req, res) => {
   const changes = req.body;
 
