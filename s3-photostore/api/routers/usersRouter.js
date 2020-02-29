@@ -15,6 +15,12 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", validateById, (req, res) => {
+  delete req.user.password;
+
+  res.status(200).json(req.user);
+});
+
 router.put("/:id", validateById, (req, res) => {
   const changes = req.body;
 
