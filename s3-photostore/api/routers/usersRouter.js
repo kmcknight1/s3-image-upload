@@ -33,15 +33,23 @@ router.put("/:id", validateById, (req, res) => {
         res.status(200).json(changedUser);
       })
       .catch(err => {
-        console.log("in the endpoint");
         res.status(500).json({ message: "Internal server error" });
       });
   }
 });
 
+router.delete("/:id", validateById, (req, res) => {
+  Users.remove(req.params.id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Internal server error" });
+    });
+});
+
 async function validateById(req, res, next) {
   const { id } = req.params;
-  console.log(id);
 
   try {
     const user = await Users.find(id);
@@ -53,7 +61,6 @@ async function validateById(req, res, next) {
       res.status(400).json({ message: "User with that id does not exist" });
     }
   } catch (err) {
-    console.log("in the validate function");
     res.status(500).json({ message: "Internal server error" });
   }
 }
