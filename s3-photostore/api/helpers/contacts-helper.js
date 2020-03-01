@@ -2,9 +2,10 @@ const db = require("../../database/dbConfig");
 
 module.exports = {
   findByUserId,
+  findUserRequests,
   sendRequest,
   acceptRequest,
-  denyRequest
+  deleteRequest
 };
 
 async function findByUserId(id) {
@@ -19,6 +20,16 @@ async function findByUserId(id) {
     .returning("*");
 
   return { sender, receiver };
+}
+
+async function findUserRequests(receiver_id) {
+  const requests = await db("contacts")
+    .join("users", "users.id", "contacts.sender_id")
+    .where("contacts.receiver_id", "=", receiver_id)
+    .where("contacts.pending", "=", true)
+    .select("contacts.id", "username", "sender_id", "receiver_id", "pending");
+
+  return requests;
 }
 
 //creating a new row in the contacts table, pending === true
@@ -41,9 +52,9 @@ async function acceptRequest(sender_id, receiver_id) {
 }
 
 //delete the row in contacts table
-function denyRequest(sender_id, receiver_id) {
+function deleteRequest(sender_id, receiver_id) {
   return db("contacts")
-    .where({ sender_id: id })
-    .where({ receiver_id: id })
+    .where({ sender_id })
+    .where({ receiver_id })
     .del();
 }
