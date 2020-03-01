@@ -26,4 +26,16 @@ router.post("/send-request", async (req, res) => {
     });
 });
 
+router.put("/accept-request", (req, res) => {
+  const { sender_id, receiver_id } = req.body;
+
+  Contacts.acceptRequest(sender_id, receiver_id)
+    .then(request => {
+      res.status(200).json(request);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Internal server error" });
+    });
+});
+
 module.exports = router;

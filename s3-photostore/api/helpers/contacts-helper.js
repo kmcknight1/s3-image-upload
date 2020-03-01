@@ -10,10 +10,12 @@ module.exports = {
 async function findByUserId(id) {
   const sender = await db("contacts")
     .where({ sender_id: id })
+    .where({ pending: false })
     .returning("*");
 
   const receiver = await db("contacts")
     .where({ receiver_id: id })
+    .where({ pending: false })
     .returning("*");
 
   return { sender, receiver };
@@ -32,7 +34,7 @@ async function acceptRequest(sender_id, receiver_id) {
   const [request] = await db("contacts")
     .where({ sender_id })
     .where({ receiver_id })
-    .update({ pending: true })
+    .update({ pending: false })
     .returning("*");
 
   return request;
