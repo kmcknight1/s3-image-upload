@@ -5,6 +5,8 @@ const cors = require("cors");
 const { image_upload, text_upload } = require("./image_upload");
 
 const authRouter = require("./routers/authRouter");
+const usersRouter = require("./routers/usersRouter");
+const contactsRouter = require("./routers/contactsRouter");
 
 const singleUpload = image_upload.single("image");
 
@@ -15,6 +17,8 @@ const middlewareConfig = [helmet(), express.json(), morgan("combined"), cors()];
 server.use(middlewareConfig);
 
 server.use("/api/auth", authRouter);
+server.use("/api/users", usersRouter);
+server.use("/api/contacts", contactsRouter);
 
 server.get("/", (_, res) => {
   res.send(`<h1>Server is up and running :)</h1>`);

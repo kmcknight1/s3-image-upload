@@ -43,6 +43,6 @@ async function update(changes, id) {
 
 function remove(id) {
   return db("users")
-    .where(id)
+    .where({ id })
     .del();
 }
