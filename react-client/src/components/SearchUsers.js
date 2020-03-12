@@ -9,6 +9,7 @@ export default function SearchUsers() {
   const [username, setUsername] = useState();
   const [searchText, setSearchText] = useState();
   const userId = localStorage.getItem("photostore_id");
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     getAllUsers();
@@ -39,6 +40,11 @@ export default function SearchUsers() {
     console.log(searchText);
   }
 
+  function clickUser(user) {
+    setReceiver_id(user.id);
+    setUsername(user.username);
+  }
+
   return (
     <div
       style={{
@@ -58,6 +64,25 @@ export default function SearchUsers() {
           onChange={handleSearchInputChange}
         />
       </form>
+      <button
+        onClick={() => {
+          showAll ? setShowAll(false) : setShowAll(true);
+        }}
+      >
+        {showAll ? "Hide All" : "Show All"}
+      </button>
+      {showAll &&
+        allUsers.map(user => {
+          return (
+            <p
+              key={user.id}
+              onClick={() => clickUser(user)}
+              style={{ cursor: "pointer" }}
+            >
+              {user.username}
+            </p>
+          );
+        })}
       {filteredUsers &&
         filteredUsers.map(user => {
           return (
@@ -65,13 +90,7 @@ export default function SearchUsers() {
               key={user.id}
               style={{ display: "flex", alignItems: "center" }}
             >
-              <p
-                onClick={() => {
-                  setReceiver_id(user.id);
-                  setUsername(user.username);
-                }}
-                style={{ cursor: "pointer" }}
-              >
+              <p onClick={() => clickUser(user)} style={{ cursor: "pointer" }}>
                 {user.username}
               </p>
             </div>
