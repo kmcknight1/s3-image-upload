@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function SendRequest({ sender_id, receiver_id, username }) {
-  const [existingRequest, setExistingRequest] = useState();
+  const [existingRequest, setExistingRequest] = useState(false);
 
   useEffect(() => {
+    setExistingRequest(false);
     if (receiver_id) {
       checkForExistingRequest();
     }
