@@ -27,7 +27,6 @@ export default function SearchUsers() {
     axios
       .get("http://localhost:8888/api/users/")
       .then(res => {
-        console.log("USERS: ", res.data);
         setAllUsers(res.data);
       })
       .catch(err => {
@@ -73,7 +72,7 @@ export default function SearchUsers() {
                 }}
                 style={{ cursor: "pointer" }}
               >
-                {user.username}{" "}
+                {user.username}
               </p>
             </div>
           );
