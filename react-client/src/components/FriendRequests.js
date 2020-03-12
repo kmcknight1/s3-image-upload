@@ -54,6 +54,7 @@ export default function FriendRequests() {
           form="userRequestsForm"
           value={selectValue}
         >
+          <option value="">Requests</option>
           {requests.length ? (
             requests.map(request => {
               return (
