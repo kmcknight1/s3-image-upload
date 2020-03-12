@@ -72,6 +72,7 @@ export default function SearchUsers() {
         {showAll ? "Hide All" : "Show All"}
       </button>
       {showAll &&
+        !filteredUsers &&
         allUsers.map(user => {
           return (
             <p
