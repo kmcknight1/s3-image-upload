@@ -44,8 +44,8 @@ export default function FriendRequests() {
   }
 
   return (
-    <>
-      <div>FRIEND REQUESTS</div>
+    <div style={{ border: "1px solid green", width: "75%" }}>
+      <h1>FRIEND REQUESTS</h1>
       <form id="userRequestForm">
         <select
           onChange={selectUserRequest}
@@ -85,6 +85,6 @@ export default function FriendRequests() {
           </button>
         </>
       )}
-    </>
+    </div>
   );
 }

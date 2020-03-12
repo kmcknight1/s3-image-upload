@@ -17,7 +17,14 @@ export default function Homepage() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}
+    >
       {!id ? (
         loginRoute()
       ) : (
@@ -26,6 +33,6 @@ export default function Homepage() {
           <button onClick={logout}>LOG OUT</button>
         </>
       )}
-    </>
+    </div>
   );
 }

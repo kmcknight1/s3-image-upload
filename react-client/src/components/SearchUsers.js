@@ -3,45 +3,86 @@ import axios from "axios";
 import SendRequest from "./SendRequest";
 
 export default function SearchUsers() {
-  const [users, setUsers] = useState();
-  const [sender_id, setSender_id] = useState();
+  const [allUsers, setAllUsers] = useState();
+  const [filteredUsers, setFilteredUsers] = useState();
+  const [receiver_id, setReceiver_id] = useState();
   const [username, setUsername] = useState();
+  const [searchText, setSearchText] = useState();
   const userId = localStorage.getItem("photostore_id");
 
   useEffect(() => {
     getAllUsers();
   }, []);
 
+  useEffect(() => {
+    if (allUsers) {
+      const results = allUsers.filter(user => {
+        return user.username.includes(searchText);
+      });
+      setFilteredUsers(results);
+    }
+  }, [searchText]);
+
   function getAllUsers() {
     axios
       .get("http://localhost:8888/api/users/")
       .then(res => {
         console.log("USERS: ", res.data);
-        setUsers(res.data);
+        setAllUsers(res.data);
       })
       .catch(err => {
         console.log(err);
       });
   }
 
+  function handleSearchInputChange(e) {
+    setSearchText(e.target.value);
+    console.log(searchText);
+  }
+
   return (
-    <>
+    <div
+      style={{
+        border: "1px solid darkslategrey",
+        width: "75%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}
+    >
       <h1>SEARCH USERS</h1>
-      {users &&
-        users.map(user => {
+      <form>
+        <input
+          type="text"
+          value={searchText}
+          name="searchText"
+          onChange={handleSearchInputChange}
+        />
+      </form>
+      {filteredUsers &&
+        filteredUsers.map(user => {
           return (
-            <button
-              onClick={() => {
-                setSender_id(user.id);
-                setUsername(user.username);
-              }}
+            <div
               key={user.id}
+              style={{ display: "flex", alignItems: "center" }}
             >
-              {user.username}
-            </button>
+              <p
+                onClick={() => {
+                  setReceiver_id(user.id);
+                  setUsername(user.username);
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                {user.username}{" "}
+              </p>
+            </div>
           );
         })}
-      <SendRequest sender_id={sender_id} username={username} />
-    </>
+      <SendRequest
+        sender_id={userId}
+        receiver_id={receiver_id}
+        username={username}
+      />
+    </div>
   );
 }
