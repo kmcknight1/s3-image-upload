@@ -36,9 +36,13 @@ export default function SendRequest({ sender_id, receiver_id, username }) {
       })
       .then(res => {
         console.log("RES DATA", res.data);
+        alert("Your Friend Request has been sent");
+        window.location.reload();
       })
       .catch(err => {
         console.log("ERR", err);
+        alert("Sorry, something went wrong. Please try again.");
+        window.location.reload();
       });
   }
 
