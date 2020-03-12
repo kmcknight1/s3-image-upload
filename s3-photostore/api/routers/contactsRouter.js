@@ -1,4 +1,6 @@
 const router = require("express").Router();
+//how do I have 2 servers running on one repo???
+//how do I write the seperate start scriptes, do they have to be separate???
 
 const Contacts = require("../helpers/contacts-helper");
 
