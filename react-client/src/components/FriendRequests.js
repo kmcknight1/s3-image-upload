@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function FriendRequests() {
+export default function FriendRequests({ contacts }) {
   const [requests, setRequests] = useState([]);
   const [selectValue, setSelectValue] = useState();
   // const [senderId, setSenderId] = useState();
@@ -9,6 +9,7 @@ export default function FriendRequests() {
 
   useEffect(() => {
     getRequests();
+    console.log(contacts);
   }, []);
 
   function getRequests() {
