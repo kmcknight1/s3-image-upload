@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
 
@@ -9,7 +9,6 @@ import SearchUsers from "./components/SearchUsers";
 import FriendRequests from "./components/FriendRequests";
 
 function App() {
-  const history = useHistory();
   const [contacts, setContacts] = useState();
   const id = localStorage.getItem("photostore_id");
 

@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import FriendRequests from "./FriendRequests";
-import SearchUsers from "./SearchUsers";
-
 export default function Dashboard() {
   return (
     <>

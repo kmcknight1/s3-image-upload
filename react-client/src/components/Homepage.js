@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import Login from "./Login";
 import Dashboard from "./Dashboard";
-import axios from "axios";
 
 export default function Homepage() {
   const id = localStorage.getItem("photostore_id");

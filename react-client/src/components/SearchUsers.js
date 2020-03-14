@@ -8,20 +8,9 @@ export default function SearchUsers(props) {
   const [receiver_id, setReceiver_id] = useState();
   const [username, setUsername] = useState();
   const [searchText, setSearchText] = useState();
-  const userId = localStorage.getItem("photostore_id");
   const [showAll, setShowAll] = useState(false);
   const [contactIds, setContactIds] = useState([]);
-
-  //making an array of contact ids
-  // useEffect(() => {
-  //   if (props.contacts) {
-  //     setContactIds(
-  //       props.contacts.map(contact => {
-  //         return [contact.sender_id, contact.receiver_id];
-  //       })
-  //     );
-  //   }
-  // }, [props.contacts]);
+  const userId = localStorage.getItem("photostore_id");
 
   //getting all users
   useEffect(() => {
@@ -29,7 +18,6 @@ export default function SearchUsers(props) {
   }, []);
 
   useEffect(() => {
-    doIt();
     if (props.contacts) {
       let senderIds = props.contacts.map(contact => contact.sender_id);
       let receiverIds = props.contacts.map(contact => contact.receiver_id);
@@ -67,12 +55,6 @@ export default function SearchUsers(props) {
   function clickUser(user) {
     setReceiver_id(user.id);
     setUsername(user.username);
-  }
-
-  function doIt() {
-    setTimeout(() => {
-      console.log("DOING IT:", props);
-    }, 2000);
   }
 
   return (

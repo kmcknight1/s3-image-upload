@@ -4,7 +4,6 @@ import axios from "axios";
 export default function FriendRequests({ contacts }) {
   const [requests, setRequests] = useState([]);
   const [selectValue, setSelectValue] = useState();
-  // const [senderId, setSenderId] = useState();
   const userId = localStorage.getItem("photostore_id");
 
   useEffect(() => {
