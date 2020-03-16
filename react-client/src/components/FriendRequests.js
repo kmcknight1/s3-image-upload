@@ -54,18 +54,17 @@ export default function FriendRequests({ contacts }) {
           form="userRequestsForm"
           value={selectValue}
         >
-          <option value="">Requests</option>
-          {requests.length ? (
+          <option value="">
+            {requests.length ? "Requests" : "No friend requests"}
+          </option>
+          {requests.length &&
             requests.map(request => {
               return (
                 <option value={request.username} key={request.id}>
                   {request.username}
                 </option>
               );
-            })
-          ) : (
-            <option>No Requests</option>
-          )}
+            })}
         </select>
       </form>
       {selectValue && (
