@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 const Contacts = require("../helpers/contacts-helper");
 
+//GET contacts by user ID
 router.get("/:id", (req, res) => {
   const { id } = req.params;
 
@@ -29,6 +30,8 @@ router.get("/requests/:id", (req, res) => {
 router.post("/send-request", async (req, res) => {
   const { sender_id, receiver_id } = req.body;
 
+  //make it so a user can't send a request to an already requested user
+  //make it so a user can't send a request to a person that's already a contact
   Contacts.sendRequest(sender_id, receiver_id)
     .then(request => {
       res.status(201).json(request);

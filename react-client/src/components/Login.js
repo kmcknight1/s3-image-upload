@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  let history = useHistory();
 
   function submitLogin(e) {
     e.preventDefault();
@@ -11,6 +13,7 @@ export default function Login() {
       .post("http://localhost:8888/api/auth/login", { username, password })
       .then(res => {
         localStorage.setItem("photostore_id", res.data.id);
+        history.push("/");
         console.log("res", res);
       })
       .catch(err => console.log("err", err));
