@@ -30,17 +30,13 @@ function App() {
       });
   };
 
-  const beep = "beep";
-
   return (
     <div className="App">
       <Route exact path="/" component={Homepage} />
       <Route path="/login" component={Login} />
       <Route
         path="/search-users"
-        render={props => (
-          <SearchUsers {...props} contacts={contacts} beep={beep} />
-        )}
+        render={props => <SearchUsers {...props} contacts={contacts} />}
       />
       <Route path="/friend-requests" component={FriendRequests} />
     </div>
